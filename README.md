@@ -1,6 +1,6 @@
 # soccer
 
-Simple slutter web project with http call
+Simple slutter project with http call
 
 ## Getting Started
 
