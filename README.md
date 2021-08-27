@@ -1,6 +1,6 @@
 # soccer
 
-A new Flutter project.
+Simple slutter web project with http call
 
 ## Getting Started
 
