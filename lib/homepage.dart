@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:soccer/models/ResponseVideo.dart';
 import 'package:soccer/models/VideoContent.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:soccer/video_details.dart';
 
 class Homepage extends StatelessWidget {
@@ -29,6 +28,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<VideoContent> videos = [];
   var jsonData;
+  var icona = Icon(Icons.search);
+  Widget widgetRicerca =
+      Text("VVSoccer", style: TextStyle(color: Colors.white));
 
   @override
   void initState() {
@@ -55,6 +57,28 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("VVSoccer"),
+        actions: [
+          IconButton(
+              icon: icona,
+              onPressed: () {
+                setState(() {
+                  if (this.icona.icon == Icons.search) {
+                    this.icona = Icon(Icons.cancel);
+                    this.widgetRicerca = TextField(
+                      onSubmitted: (testoRicerca) => print(testoRicerca),
+                      textInputAction: TextInputAction.search,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    );
+                  } else {
+                    setState(() {
+                      this.icona = Icon(Icons.search);
+                      this.widgetRicerca = Text("VVSoccer",
+                          style: TextStyle(color: Colors.white));
+                    });
+                  }
+                });
+              }),
+        ],
       ),
       body: Center(
           child: Container(
