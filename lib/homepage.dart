@@ -29,9 +29,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<VideoContent> videos = [];
   var jsonData;
-  final _htmlContent = """
-  <div style='width:100%;height:0px;position:relative;padding-bottom:56.250%;'><iframe src='https:\/\/www.scorebat.com\/embed\/v\/6128c4483364d\/?utm_source=api&utm_medium=video&utm_campaign=v3' frameborder='0' width='100%' height='100%' allowfullscreen allow='autoplay; fullscreen' style='width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;'><\/iframe><\/div>
-  """;
 
   @override
   void initState() {
@@ -82,9 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   maxWidth: 164,
                   maxHeight: 164,
                 ),
-                child: Html(
+                /*child: Html(
                   data: _htmlContent,
-                ),
+                ),*/
+                child: Image.network(videos[index].thumbnail),
               ),
             ),
           ));
