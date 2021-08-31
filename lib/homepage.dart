@@ -91,6 +91,7 @@ class _MyHomePageState extends State<Homepage> {
             child: ListTile(
               title: Text(videos[index].title),
               subtitle: Text(videos[index].competition),
+              trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 MaterialPageRoute route = MaterialPageRoute(
                     builder: (_) => VideoDetails(videos[index]));
