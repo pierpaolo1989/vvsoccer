@@ -57,11 +57,13 @@ class _MyHomePageState extends State<Homepage> {
                     this.icona = Icon(Icons.cancel);
                     this.widgetRicerca = TextField(
                       onSubmitted: (testoRicerca) {
-                        videos
+                        List<VideoContent> copy = videos;
+                        copy
                             .where((i) => i.title
                                 .toLowerCase()
                                 .contains(testoRicerca.toLowerCase()))
                             .toList();
+                        videos = copy;
                       },
                       textInputAction: TextInputAction.search,
                       style: TextStyle(color: Colors.white, fontSize: 20),
