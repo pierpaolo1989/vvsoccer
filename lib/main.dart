@@ -25,27 +25,32 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
 class _MyHomePageState extends State<MyHomePage> {
- 
- @override
+  @override
   void initState() {
-     Timer(Duration(seconds: 5),
-              ()=>Navigator.pushReplacement(context,
-              MaterialPageRoute(builder:
-                  (context) => Homepage(),
-              )
-          )
-      );
+    Timer(
+        Duration(seconds: 5),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Homepage(),
+            )));
     super.initState();
   }
- 
+
   @override
   Widget build(BuildContext context) {
-     return Container(
-        color: Colors.white,
-        child: Image(image: AssetImage('assets/logo.png'))
+    return Container(
+      color: Colors.white,
+      child: Column(children: [
+        Image(image: AssetImage('assets/logo.png')),
+        AnimatedAlign(
+          alignment: Alignment.center,
+          duration: const Duration(seconds: 1),
+          curve: Curves.fastOutSlowIn,
+          child: const FlutterLogo(size: 50.0),
+        ),
+      ]),
     );
   }
-
 }
