@@ -1,31 +1,18 @@
 import 'dart:convert';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:soccer/models/ResponseVideo.dart';
 import 'package:soccer/models/VideoContent.dart';
 import 'package:soccer/video_details.dart';
 
-class Homepage extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
+class Homepage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<Homepage> {
   List<VideoContent> videos = [];
   var jsonData;
   var icona = Icon(Icons.search);
@@ -36,6 +23,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     getVideos();
     super.initState();
+  }
+
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    return MobileAds.instance.initialize();
   }
 
   Future getVideos() async {
@@ -56,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("VVSoccer"),
+        title: widgetRicerca,
         actions: [
           IconButton(
               icon: icona,
@@ -65,7 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (this.icona.icon == Icons.search) {
                     this.icona = Icon(Icons.cancel);
                     this.widgetRicerca = TextField(
-                      onSubmitted: (testoRicerca) => print(testoRicerca),
+                      onSubmitted: (testoRicerca) {
+                        videos
+                            .where((i) => i.title
+                                .toLowerCase()
+                                .contains(testoRicerca.toLowerCase()))
+                            .toList();
+                      },
                       textInputAction: TextInputAction.search,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     );
@@ -74,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       this.icona = Icon(Icons.search);
                       this.widgetRicerca = Text("VVSoccer",
                           style: TextStyle(color: Colors.white));
+                      getVideos();
                     });
                   }
                 });
